@@ -3,6 +3,7 @@ package frc.robot;
 public final class Constants {
 
     public static final class driveConstants{
+        //motor IDs
         public static final int leftDriveFront = 0;
         public static final int leftDriveBack = 0;
         public static final int rightDriveFront = 0;

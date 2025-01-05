@@ -28,7 +28,9 @@ public class TankCommand extends Command {
     double leftDrive = Math.pow(OI.getDriveController().getLeftY(), 2);
     double rightDrive = Math.pow(OI.getDriveController().getRightY(), 2);
 
-    //This can be read like a conditional statement. If leftDrive < 0.05, set it equal to 0, else, keep it the same.
+    //This can be read like a conditional statement. 
+    //If leftDrive < 0.05, set it equal to 0
+    //else, keep it the same.
     leftDrive = leftDrive < 0.05 ? 0 : leftDrive;
     rightDrive = rightDrive < 0.05 ? 0 : rightDrive;
 
