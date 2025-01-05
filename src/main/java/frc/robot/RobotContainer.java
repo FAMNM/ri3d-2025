@@ -6,11 +6,17 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.Commands.TankCommand;
+import frc.robot.Subsystem.TankSubsystem;
 
 public class RobotContainer {
   public RobotContainer() {
     configureBindings();
   }
+
+  private TankSubsystem tankSubsystem = new TankSubsystem();
+
+  public TankCommand tankCommand = new TankCommand(tankSubsystem);
 
   private void configureBindings() {}
 
