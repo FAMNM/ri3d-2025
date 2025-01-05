@@ -5,21 +5,37 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.event.BooleanEvent;
+import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Commands.LiftCommand.liftPosition;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
+  //Since we gotta use this garbage now
+  private final EventLoop m_loop = new EventLoop();
 
   private final RobotContainer m_robotContainer;
 
   public Robot() {
     m_robotContainer = new RobotContainer();
+
+    BooleanEvent setLow = new BooleanEvent(m_loop, () -> OI.getOperatorController().getRawButton(1));
+    setLow.ifHigh(() ->m_robotContainer.liftCommand.setPosition(liftPosition.LOW));
+
+    BooleanEvent setMedium = new BooleanEvent(m_loop, () -> OI.getOperatorController().getRawButton(2));
+    setMedium.ifHigh(() ->m_robotContainer.liftCommand.setPosition(liftPosition.MEDIUM));
+
+    BooleanEvent setHigh = new BooleanEvent(m_loop, () -> OI.getOperatorController().getRawButton(3));
+    setHigh.ifHigh(() ->m_robotContainer.liftCommand.setPosition(liftPosition.HIGH));
   }
 
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+    m_loop.poll();
+
   }
 
   @Override
@@ -55,11 +71,15 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
-    m_robotContainer.tankCommand.schedule();
+    m_robotContainer.driveCommand.schedule();
+    m_robotContainer.indexCommand.schedule();
+    m_robotContainer.intakeCommand.schedule();
+    m_robotContainer.liftCommand.schedule();
   }
 
   @Override
-  public void teleopExit() {}
+  public void teleopExit() {
+  }
 
   @Override
   public void testInit() {

@@ -6,19 +6,31 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import frc.robot.Commands.TankCommand;
+import frc.robot.Commands.DriveCommand;
+import frc.robot.Commands.IndexCommand;
+import frc.robot.Commands.IntakeCommand;
 import frc.robot.Subsystem.TankSubsystem;
+import frc.robot.Subsystem.IndexSubsystem;
+import frc.robot.Subsystem.IntakeSubsystem;
+import frc.robot.Subsystem.LiftSubsystem;
+import frc.robot.Commands.LiftCommand;
 
 public class RobotContainer {
   public RobotContainer() {
-    configureBindings();
   }
 
   private TankSubsystem tankSubsystem = new TankSubsystem();
+  private LiftSubsystem liftSubsystem = new LiftSubsystem();
+  private IndexSubsystem indexSubsystem = new IndexSubsystem();
+  private IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  
 
-  public TankCommand tankCommand = new TankCommand(tankSubsystem);
+  public DriveCommand driveCommand = new DriveCommand(tankSubsystem);
+  public LiftCommand liftCommand = new LiftCommand(liftSubsystem);
+  public IndexCommand indexCommand = new IndexCommand(indexSubsystem);
+  public IntakeCommand intakeCommand = new IntakeCommand(intakeSubsystem);
 
-  private void configureBindings() {}
+
 
   public Command getAutonomousCommand() {
     return Commands.print("No autonomous command configured");

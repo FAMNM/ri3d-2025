@@ -14,7 +14,6 @@ public class TankSubsystem extends SubsystemBase{
     SparkMax rightDriveFront;
     SparkMax rightDriveBack;
 
-    //The tank subsystem is responsible for driving the robot.
     public TankSubsystem(){
         leftDriveFront = new SparkMax(driveConstants.leftDriveFront, MotorType.kBrushed);
         leftDriveBack = new SparkMax(driveConstants.leftDriveBack, MotorType.kBrushed);
@@ -24,7 +23,6 @@ public class TankSubsystem extends SubsystemBase{
         SparkMaxConfig config = new SparkMaxConfig();
         config.smartCurrentLimit(driveConstants.driveCurrentLimit);
 
-        //set the back motors to follow the front motors
         config.follow(driveConstants.leftDriveFront);
         leftDriveBack.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         config.follow(driveConstants.rightDriveFront);
@@ -37,9 +35,9 @@ public class TankSubsystem extends SubsystemBase{
         rightDriveFront.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
-    //This method drives the robot.
     public void driveTank(double leftSpeed, double rightSpeed){
         leftDriveFront.set(leftSpeed);
         rightDriveFront.set(rightSpeed);
+        System.out.println(leftSpeed);
     }
 }
