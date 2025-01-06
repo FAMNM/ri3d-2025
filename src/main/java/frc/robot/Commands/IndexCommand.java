@@ -6,16 +6,19 @@ package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.OI;
+import frc.robot.Robot;
 import frc.robot.Constants.indexConstants;
 import frc.robot.Subsystem.IndexSubsystem;
+import frc.robot.Subsystem.LiftSubsystem;
 
 public class IndexCommand extends Command {
 
   IndexSubsystem indexSubsystem;
+  LiftSubsystem liftSubsystem;
 
-  public IndexCommand(IndexSubsystem indexSubsystem) {
-    addRequirements(indexSubsystem);
+  public IndexCommand(IndexSubsystem indexSubsystem, LiftSubsystem liftSubsystem) {
     this.indexSubsystem = indexSubsystem;
+    this.liftSubsystem = liftSubsystem;
   }
 
   @Override
@@ -24,7 +27,9 @@ public class IndexCommand extends Command {
   @Override
   public void execute() {
     if(OI.getOperatorController().getRawButton(3)){
-      indexSubsystem.setSpeed(indexConstants.indexSpeed);
+      if(liftSubsystem.atPosition() || Robot.overrideLiftPosition){
+        indexSubsystem.setSpeed(indexConstants.indexSpeed);
+      }
     }else{
       indexSubsystem.setSpeed(0);
     }

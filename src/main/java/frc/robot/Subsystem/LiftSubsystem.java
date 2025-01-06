@@ -16,6 +16,7 @@ public class LiftSubsystem extends SubsystemBase {
     DigitalInput bottomLimitSwitch;
     SparkMax liftMotor;
     PIDController pid;
+    double position;
 
     public LiftSubsystem(){
         //Using motor to power lift and limit switch at the bottom
@@ -24,7 +25,7 @@ public class LiftSubsystem extends SubsystemBase {
 
         //Need PID to hold location
         pid = new PIDController(liftConstants.liftMotorP, liftConstants.liftMotorI, liftConstants.liftMotorD);
-        pid.setTolerance(50);
+        pid.setTolerance(liftConstants.liftTolerance);
 
         //Setting current limit
         SparkMaxConfig config = new SparkMaxConfig();
@@ -35,9 +36,14 @@ public class LiftSubsystem extends SubsystemBase {
 
     public void update(double position){
         double speed = pid.calculate(liftMotor.getAbsoluteEncoder().getPosition(), position);
+        this.position = position;
         //If the limit switch is triggered, we should not apply a negative speed
         if(bottomLimitSwitch.get())
             speed = speed < 0 ? 0 : speed;
         liftMotor.set(pid.calculate(liftMotor.getAbsoluteEncoder().getPosition(), position));
+    }
+
+    public boolean atPosition(){
+        return Math.abs(position - liftMotor.getAbsoluteEncoder().getPosition()) < liftConstants.liftTolerance;
     }
 }

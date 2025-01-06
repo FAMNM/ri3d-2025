@@ -12,7 +12,6 @@ public class DriveCommand extends Command {
 
   TankSubsystem tankSubsystem;
   public DriveCommand(TankSubsystem subsystem) {
-    addRequirements(subsystem);
     tankSubsystem = subsystem;
   }
 

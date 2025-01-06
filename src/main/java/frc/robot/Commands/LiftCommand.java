@@ -21,7 +21,6 @@ public class LiftCommand extends Command {
   liftPosition position;
 
   public LiftCommand(LiftSubsystem liftSubsystem) {
-    addRequirements(liftSubsystem);
     this.liftSubsystem = liftSubsystem;
 
     //Starts at low

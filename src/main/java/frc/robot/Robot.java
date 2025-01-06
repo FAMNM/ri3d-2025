@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.event.BooleanEvent;
 import edu.wpi.first.wpilibj.event.EventLoop;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Commands.LiftCommand.liftPosition;
@@ -17,6 +18,8 @@ public class Robot extends TimedRobot {
   private final EventLoop m_loop = new EventLoop();
 
   private final RobotContainer m_robotContainer;
+
+  public static boolean overrideLiftPosition = false;
 
   public Robot() {
     m_robotContainer = new RobotContainer();
@@ -29,13 +32,16 @@ public class Robot extends TimedRobot {
 
     BooleanEvent setHigh = new BooleanEvent(m_loop, () -> OI.getOperatorController().getRawButton(3));
     setHigh.ifHigh(() ->m_robotContainer.liftCommand.setPosition(liftPosition.HIGH));
+
+    BooleanEvent override = new BooleanEvent(m_loop, () -> OI.getOperatorController().getPOV() == 270);
+    override.ifHigh(() -> overrideLiftPosition = true);
   }
 
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
     m_loop.poll();
-
+    SmartDashboard.putBoolean("Lift Restriction Overridden", overrideLiftPosition);
   }
 
   @Override

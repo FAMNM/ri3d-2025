@@ -29,6 +29,8 @@ public final class Constants {
 
         public static final int liftCurrentLimit = 60;
 
+        public static final int liftTolerance = 50; //Ticks
+
         //Lift Setpoints
         public static final int low = 0;
         public static final int mid = 0;

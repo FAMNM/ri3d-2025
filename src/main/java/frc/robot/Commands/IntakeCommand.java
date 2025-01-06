@@ -15,7 +15,6 @@ public class IntakeCommand extends Command {
   boolean piece;
 
   public IntakeCommand(IntakeSubsystem intakeSubsystem) {
-    addRequirements(intakeSubsystem);
     this.intakeSubsystem = intakeSubsystem;
     piece = false;
   }

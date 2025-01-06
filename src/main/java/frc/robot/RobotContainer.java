@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.Commands.DriveCommand;
@@ -18,7 +19,6 @@ import frc.robot.Commands.LiftCommand;
 public class RobotContainer {
   public RobotContainer() {
   }
-
   private TankSubsystem tankSubsystem = new TankSubsystem();
   private LiftSubsystem liftSubsystem = new LiftSubsystem();
   private IndexSubsystem indexSubsystem = new IndexSubsystem();
@@ -27,7 +27,7 @@ public class RobotContainer {
 
   public DriveCommand driveCommand = new DriveCommand(tankSubsystem);
   public LiftCommand liftCommand = new LiftCommand(liftSubsystem);
-  public IndexCommand indexCommand = new IndexCommand(indexSubsystem);
+  public IndexCommand indexCommand = new IndexCommand(indexSubsystem, liftSubsystem);
   public IntakeCommand intakeCommand = new IntakeCommand(intakeSubsystem);
 
 
