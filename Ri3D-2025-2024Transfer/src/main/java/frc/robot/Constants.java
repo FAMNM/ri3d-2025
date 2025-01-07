@@ -39,8 +39,8 @@ public final class Constants {
 
     public static final class intakeConstants{
         public static final int intakeMotor = 12;
-        public static final double intakeSpeed = 1;
-        public static final double outtakeSpeed = 1;
+        public static final double intakeSpeed = 0.3;
+        public static final double outtakeSpeed = -0.25;
         public static final double staticSpeed = 0.1;
 
         public static final double triggerThreshold = 0.05;
