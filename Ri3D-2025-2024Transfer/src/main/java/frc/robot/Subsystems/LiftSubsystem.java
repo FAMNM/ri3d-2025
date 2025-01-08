@@ -9,11 +9,13 @@ import frc.robot.Constants.liftConstants;
 
 public class LiftSubsystem extends SubsystemBase{
     CANSparkMax liftMotor;
+    CANSparkMax starMotor;
     PIDController pid;
     double position;
 
     public LiftSubsystem(){
         liftMotor = new CANSparkMax(liftConstants.liftMotor, MotorType.kBrushless);
+        starMotor = new CANSparkMax(liftConstants.starMotor, MotorType.kBrushless);
 
         liftMotor.setSmartCurrentLimit(liftConstants.liftCurrentLimit);
 
@@ -33,6 +35,15 @@ public class LiftSubsystem extends SubsystemBase{
 
     public double getPosition(){
         return liftMotor.getEncoder().getPosition();
+    }
+
+    //temp solutions
+    public void setSpeed(double speed){
+        liftMotor.set(speed);
+    }
+
+    public void setStarSpeed(double speed){
+        starMotor.set(speed);
     }
 }
 

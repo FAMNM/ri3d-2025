@@ -21,7 +21,7 @@ private final EventLoop m_loop = new EventLoop();
   @Override
   public void robotInit() {
     m_robotContainer = new RobotContainer();
-
+/* 
     BooleanEvent setLow = new BooleanEvent(m_loop, () -> OI.getOperatorController().getRawButton(1));
     setLow.ifHigh(() ->m_robotContainer.liftCommand.setPosition(liftPosition.LOW));
 
@@ -30,8 +30,8 @@ private final EventLoop m_loop = new EventLoop();
 
     BooleanEvent setHigh = new BooleanEvent(m_loop, () -> OI.getOperatorController().getRawButton(3));
     setHigh.ifHigh(() ->m_robotContainer.liftCommand.setPosition(liftPosition.HIGH));
-
-    SmartDashboard.putNumber("Lift Encoder", m_robotContainer.liftSubsystem.getPosition());
+*/
+   // SmartDashboard.putNumber("Lift Encoder", m_robotContainer.liftSubsystem.getPosition());
   }
 
   @Override
@@ -39,7 +39,8 @@ private final EventLoop m_loop = new EventLoop();
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
     SmartDashboard.updateValues();
-    System.out.println(m_robotContainer.liftSubsystem.getPosition());
+
+    //System.out.println(m_robotContainer.liftSubsystem.getPosition());
   }
 
   @Override
@@ -77,7 +78,10 @@ private final EventLoop m_loop = new EventLoop();
   }
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    m_robotContainer.driveCommand.schedule();
+    m_robotContainer.intakeCommand.schedule();
+  }
 
   @Override
   public void teleopExit() {}

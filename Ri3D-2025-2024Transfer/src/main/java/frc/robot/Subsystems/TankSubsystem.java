@@ -15,9 +15,13 @@ public class TankSubsystem extends SubsystemBase{
 
     public TankSubsystem(){
         leftDriveFront = new CANSparkMax(driveConstants.leftDriveFront, MotorType.kBrushed);
+        leftDriveFront.setIdleMode(CANSparkMax.IdleMode.kCoast);
         leftDriveBack = new CANSparkMax(driveConstants.leftDriveBack, MotorType.kBrushed);
+        leftDriveBack.setIdleMode(CANSparkMax.IdleMode.kCoast);
         rightDriveFront = new CANSparkMax(driveConstants.rightDriveFront, MotorType.kBrushed);
+        leftDriveFront.setIdleMode(CANSparkMax.IdleMode.kCoast);
         rightDriveBack = new CANSparkMax(driveConstants.rightDriveBack, MotorType.kBrushed);
+        leftDriveBack.setIdleMode(CANSparkMax.IdleMode.kCoast);
 
         leftDriveFront.setSmartCurrentLimit(driveConstants.driveCurrentLimit);
         rightDriveFront.setSmartCurrentLimit(driveConstants.driveCurrentLimit);

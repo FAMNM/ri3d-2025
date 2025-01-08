@@ -26,7 +26,11 @@ public class IntakeCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(OI.getOperatorController().getRawAxis(3) > intakeConstants.triggerThreshold){ 
+    if(OI.getOperatorController().getLeftBumper())
+    {
+      intakeSubsystem.setSpeed(intakeConstants.overrideSpeed);
+    }
+    else if(OI.getOperatorController().getRawAxis(3) > intakeConstants.triggerThreshold){ 
       //Prioritizes outtake if both are pressed
       intakeSubsystem.setSpeed(intakeConstants.outtakeSpeed);
       piece = false;
